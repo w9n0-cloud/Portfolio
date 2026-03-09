@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <div id="particles-js"></div>
 
@@ -20,10 +20,9 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home" class="nav-link active">Accueil</a></li>
-            <li><a href="#about" class="nav-link">À propos</a></li>
+            <li><a href="#about" class="nav-link">Qui je suis</a></li>
             <li><a href="#skills" class="nav-link">Compétences</a></li>
             <li><a href="projects.html" class="nav-link">Projets</a></li>
-            <li><a href="tableau-synthese.html" class="nav-link">Tableau de Synthèse</a></li>
             <li><a href="cv.html" class="nav-link">Mon CV</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -37,7 +36,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <span class="greeting">Bonjour, je suis</span>
+                <span class="greeting">Salut, moi c'est</span>
                 <h1 class="glitch" data-text="Mohamed BEN HARIZ">Mohamed BEN HARIZ</h1>
                 <div class="typing-container">
                     <span class="static-text">Je suis </span>
@@ -45,30 +44,30 @@
                     <span class="cursor-typing">|</span>
                 </div>
                 <p class="hero-description">
-                    Étudiant passionné en <span class="highlight">BTS SIO</span> première année à l'<span class="highlight">EFREI Paris</span>, 
-                    spécialisé dans le développement et les réseaux informatiques.
+                    Étudiant en <span class="highlight">BTS SIO</span> à l'<span class="highlight">EFREI Paris</span>,
+                    j'aime autant coder et bidouiller des réseaux que discuter pendant des heures de tout et n'importe quoi.
                 </p>
                 <div class="hero-buttons">
-                    <a href="projects.html" class="btn btn-primary">
-                        <span>Voir mes projets</span>
-                        <i class="fas fa-arrow-right"></i>
+                    <a href="#about" class="btn btn-primary">
+                        <span>En savoir plus</span>
+                        <i class="fas fa-arrow-down"></i>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Me contacter</span>
-                        <i class="fas fa-envelope"></i>
+                    <a href="projects.html" class="btn btn-secondary">
+                        <span>Mes projets</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="social-links">
-                    <a href="https://github.com/w9n0-cloud" class="social-link" data-tooltip="GitHub" target="_blank">
+                    <a href="https://github.com/w9n0-cloud" class="social-link" data-tooltip="GitHub" target="_blank" aria-label="Mon GitHub">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://guns.lol/w9n0" class="social-link" data-tooltip="Guns.lol" target="_blank">
-                        <i class="fas fa-link"></i>
+                    <a href="https://guns.lol/w9n0" class="social-link" data-tooltip="Mon Linktree" target="_blank" aria-label="Tous mes liens">
+                        <i class="fas fa-globe"></i>
                     </a>
-                    <a href="https://www.instagram.com/mh._948" class="social-link" data-tooltip="Instagram" target="_blank">
+                    <a href="https://www.instagram.com/mh._948" class="social-link" data-tooltip="Instagram" target="_blank" aria-label="Mon Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="mailto:nassimbenhariz@gmail.com" class="social-link" data-tooltip="Email">
+                    <a href="mailto:nassimbenhariz@gmail.com" class="social-link" data-tooltip="Email" aria-label="M'envoyer un mail">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
@@ -81,11 +80,11 @@
                     </div>
                 </div>
                 <div class="floating-icons">
-                    <div class="float-icon icon-1"><i class="fab fa-html5"></i></div>
-                    <div class="float-icon icon-2"><i class="fab fa-css3-alt"></i></div>
-                    <div class="float-icon icon-3"><i class="fab fa-js"></i></div>
+                    <div class="float-icon icon-1"><i class="fas fa-shield-alt"></i></div>
+                    <div class="float-icon icon-2"><i class="fab fa-js"></i></div>
+                    <div class="float-icon icon-3"><i class="fas fa-comments"></i></div>
                     <div class="float-icon icon-4"><i class="fab fa-python"></i></div>
-                    <div class="float-icon icon-5"><i class="fas fa-network-wired"></i></div>
+                    <div class="float-icon icon-5"><i class="fas fa-gamepad"></i></div>
                 </div>
             </div>
         </div>
@@ -97,80 +96,33 @@
         </div>
     </section>
 
-    <section id="quick-access" class="quick-access">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">00.</span>
-                Accès Rapide
-            </h2>
-            <p class="quick-access-subtitle">Trouvez rapidement ce que vous cherchez</p>
-            
-            <div class="quick-cards">
-                <a href="cv.html" class="quick-card">
-                    <div class="quick-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3>Mon CV</h3>
-                    <p>Parcours, formations et expériences professionnelles</p>
-                    <span class="quick-arrow"><i class="fas fa-arrow-right"></i></span>
-                </a>
-                
-                <a href="projects.html" class="quick-card">
-                    <div class="quick-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Mes Projets</h3>
-                    <p>Portfolio, NOVA Hackathon, applications et plus</p>
-                    <span class="quick-arrow"><i class="fas fa-arrow-right"></i></span>
-                </a>
-                
-                <a href="tableau-synthese.html" class="quick-card">
-                    <div class="quick-icon">
-                        <i class="fas fa-table"></i>
-                    </div>
-                    <h3>Tableau BTS SIO</h3>
-                    <p>Compétences et réalisations du référentiel BTS</p>
-                    <span class="quick-arrow"><i class="fas fa-arrow-right"></i></span>
-                </a>
-                
-                <a href="#contact" class="quick-card">
-                    <div class="quick-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Me Contacter</h3>
-                    <p>Email, téléphone et formulaire de contact</p>
-                    <span class="quick-arrow"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-        </div>
-    </section>
-
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-number">01.</span>
-                À propos de moi
+                Qui je suis
             </h2>
             <div class="about-content">
                 <div class="about-image reveal-left">
                     <div class="image-frame">
                         <div class="about-placeholder">
-                            <i class="fas fa-code"></i>
+                            <i class="fas fa-hand-peace"></i>
                         </div>
                     </div>
                 </div>
                 <div class="about-text reveal-right">
                     <p>
-                        Passionné par l'informatique depuis toujours, je suis actuellement en 
-                        <span class="highlight">première année de BTS SIO</span> (Services Informatiques aux Organisations).
+                        Je suis quelqu'un de <span class="highlight">très ouvert</span> et sociable - le genre de personne
+                        qui peut parler pendant des heures de cyber, de tech, ou juste de la vie en général.
                     </p>
                     <p>
-                        Mon parcours m'a permis d'acquérir des compétences solides aussi bien en 
-                        <span class="highlight">développement</span> qu'en <span class="highlight">administration réseau</span>.
+                        Actuellement en <span class="highlight">BTS SIO à l'EFREI Paris</span>, je touche à tout :
+                        développement web, réseaux, cybersécurité... mais je ne me limite pas qu'à l'informatique.
                     </p>
                     <p>
-                        Je suis constamment à la recherche de nouveaux défis et j'aime apprendre 
-                        de nouvelles technologies pour enrichir mes connaissances.
+                        Ce qui me définit le mieux ? La <span class="highlight">curiosité</span>. J'adore découvrir,
+                        comprendre comment les choses fonctionnent, et surtout <span class="highlight">échanger</span> avec les gens
+                        autour de moi sur n'importe quel sujet.
                     </p>
                     <div class="about-stats">
                         <a href="projects.html" class="stat-item clickable">
@@ -191,12 +143,71 @@
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="personality" class="personality-section">
         <div class="container">
             <h2 class="section-title">
                 <span class="title-number">02.</span>
+                Au-delà du code
+            </h2>
+            <p class="personality-subtitle">L'informatique c'est ma passion, mais y'a pas que ça dans la vie</p>
+
+            <div class="personality-grid">
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Toujours partant pour discuter</h3>
+                    <p>Que ce soit pour parler tech, debattre sur un sujet random ou juste rigoler, je suis toujours dispo. Le contact humain c'est essentiel pour moi.</p>
+                </div>
+
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersécurité</h3>
+                    <p>C'est un domaine qui me fascine : comprendre les failles, protéger les systèmes, résoudre des puzzles. C'est un peu mon terrain de jeu préféré.</p>
+                </div>
+
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Sport & Bien-être</h3>
+                    <p>La salle de sport c'est mon deuxième bureau. Se dépasser physiquement, ça aide aussi à se dépasser mentalement.</p>
+                </div>
+
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Curiosité sans limites</h3>
+                    <p>Je suis du genre à tomber dans un rabbit hole YouTube à 2h du mat'. Politique, science, techno, psychologie... tout m'intéresse.</p>
+                </div>
+
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gaming</h3>
+                    <p>Que ce soit en compétitif ou chill, le gaming c'est aussi un moyen de se détendre et de partager des moments avec les potes.</p>
+                </div>
+
+                <div class="personality-card">
+                    <div class="personality-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Esprit d'équipe</h3>
+                    <p>J'adore bosser en équipe. Le hackathon NOVA avec 8 personnes ? Meilleure expérience. Les meilleures idées naissent du collectif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">03.</span>
                 Mes Compétences
-                <a href="tableau-synthese.html" class="section-link">Voir le détail BTS SIO <i class="fas fa-external-link-alt"></i></a>
             </h2>
             
             <div class="skills-tabs">
@@ -217,7 +228,7 @@
             <div class="skills-content">
                 <div class="tab-content active" id="dev">
                     <div class="skills-grid">
-                        <div class="skill-card" data-aos="fade-up">
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up">
                             <div class="skill-icon">
                                 <i class="fab fa-html5"></i>
                             </div>
@@ -226,8 +237,8 @@
                                 <div class="skill-progress" data-progress="90"></div>
                             </div>
                             <span class="skill-percent">90%</span>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up" data-aos-delay="100">
                             <div class="skill-icon">
                                 <i class="fab fa-css3-alt"></i>
                             </div>
@@ -236,8 +247,8 @@
                                 <div class="skill-progress" data-progress="85"></div>
                             </div>
                             <span class="skill-percent">85%</span>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up" data-aos-delay="200">
                             <div class="skill-icon">
                                 <i class="fab fa-js"></i>
                             </div>
@@ -246,8 +257,8 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up" data-aos-delay="300">
                             <div class="skill-icon">
                                 <i class="fab fa-python"></i>
                             </div>
@@ -256,8 +267,8 @@
                                 <div class="skill-progress" data-progress="80"></div>
                             </div>
                             <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up" data-aos-delay="400">
                             <div class="skill-icon">
                                 <i class="fab fa-php"></i>
                             </div>
@@ -266,8 +277,8 @@
                                 <div class="skill-progress" data-progress="70"></div>
                             </div>
                             <span class="skill-percent">70%</span>
-                        </div>
-                        <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card" data-aos="fade-up" data-aos-delay="500">
                             <div class="skill-icon">
                                 <i class="fas fa-database"></i>
                             </div>
@@ -276,13 +287,13 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
                 <div class="tab-content" id="network">
                     <div class="skills-grid">
-                        <div class="skill-card">
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-server"></i>
                             </div>
@@ -291,8 +302,8 @@
                                 <div class="skill-progress" data-progress="80"></div>
                             </div>
                             <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fab fa-linux"></i>
                             </div>
@@ -301,8 +312,8 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fab fa-windows"></i>
                             </div>
@@ -311,8 +322,8 @@
                                 <div class="skill-progress" data-progress="70"></div>
                             </div>
                             <span class="skill-percent">70%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
@@ -321,8 +332,8 @@
                                 <div class="skill-progress" data-progress="65"></div>
                             </div>
                             <span class="skill-percent">65%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-project-diagram"></i>
                             </div>
@@ -331,8 +342,8 @@
                                 <div class="skill-progress" data-progress="80"></div>
                             </div>
                             <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-wifi"></i>
                             </div>
@@ -341,13 +352,13 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
                 <div class="tab-content" id="tools">
                     <div class="skills-grid">
-                        <div class="skill-card">
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fab fa-git-alt"></i>
                             </div>
@@ -356,8 +367,8 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fab fa-github"></i>
                             </div>
@@ -366,8 +377,8 @@
                                 <div class="skill-progress" data-progress="80"></div>
                             </div>
                             <span class="skill-percent">80%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-terminal"></i>
                             </div>
@@ -376,8 +387,8 @@
                                 <div class="skill-progress" data-progress="70"></div>
                             </div>
                             <span class="skill-percent">70%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-cube"></i>
                             </div>
@@ -386,8 +397,8 @@
                                 <div class="skill-progress" data-progress="75"></div>
                             </div>
                             <span class="skill-percent">75%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fas fa-code-branch"></i>
                             </div>
@@ -396,8 +407,8 @@
                                 <div class="skill-progress" data-progress="90"></div>
                             </div>
                             <span class="skill-percent">90%</span>
-                        </div>
-                        <div class="skill-card">
+                        </a>
+                        <a href="tableau-synthese.html" class="skill-card">
                             <div class="skill-icon">
                                 <i class="fab fa-docker"></i>
                             </div>
@@ -406,7 +417,7 @@
                                 <div class="skill-progress" data-progress="50"></div>
                             </div>
                             <span class="skill-percent">50%</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -416,7 +427,7 @@
     <section id="tableau" class="tableau-preview">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">03.</span>
+                <span class="title-number">04.</span>
                 Tableau de Synthèse BTS SIO
             </h2>
             
@@ -425,12 +436,12 @@
                     <div class="preview-icon">
                         <i class="fas fa-table"></i>
                     </div>
-                    <h3>Compétences BTS SIO</h3>
-                    <p>Retrouvez l'ensemble de mes compétences acquises en cours, organisées selon le référentiel officiel du BTS SIO :</p>
+                    <h3>Mon parcours en BTS SIO</h3>
+                    <p>Tout ce que j'apprends en cours, trié et organisé. Si t'es recruteur ou prof, c'est ici que ça se passe :</p>
                     <ul class="preview-list">
-                        <li><i class="fas fa-check"></i> Bloc 1 - Support et mise à disposition de services</li>
-                        <li><i class="fas fa-check"></i> Bloc 2 - Option SLAM (Développement)</li>
-                        <li><i class="fas fa-check"></i> Bloc 3 - Option SISR (Réseaux)</li>
+                        <li><i class="fas fa-check"></i> Support & services informatiques</li>
+                        <li><i class="fas fa-check"></i> Développement (option SLAM)</li>
+                        <li><i class="fas fa-check"></i> Réseaux & infrastructure (option SISR)</li>
                     </ul>
                     <a href="tableau-synthese.html" class="btn btn-primary">
                         <span>Voir le tableau complet</span>
@@ -475,7 +486,7 @@
     <section id="timeline" class="timeline-section">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">04.</span>
+                <span class="title-number">05.</span>
                 Mon Parcours
             </h2>
             <div class="timeline">
@@ -521,25 +532,25 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-number">05.</span>
+                <span class="title-number">06.</span>
                 Me Contacter
             </h2>
             <div class="contact-content">
                 <div class="contact-info reveal-left">
-                    <h3>Discutons ensemble !</h3>
-                    <p>Je suis toujours ouvert aux nouvelles opportunités et collaborations. N'hésitez pas à me contacter !</p>
+                    <h3>Viens, on discute !</h3>
+                    <p>Que ce soit pour un projet, une question, une idée à partager ou juste pour faire connaissance - je suis toujours chaud pour échanger. Hésite vraiment pas !</p>
                     <div class="contact-details">
-                        <div class="contact-item">
+                        <a href="mailto:nassimbenhariz@gmail.com" class="contact-item clickable-contact">
                             <i class="fas fa-envelope"></i>
                             <span>nassimbenhariz@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
+                        </a>
+                        <a href="tel:+33749223129" class="contact-item clickable-contact">
                             <i class="fas fa-phone"></i>
                             <span>+33 7 49 22 31 29</span>
-                        </div>
+                        </a>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>120 rue Youri Gagarine, 94800 Villejuif</span>
+                            <span>Villejuif, 94800</span>
                         </div>
                     </div>
                     <div class="contact-social">
@@ -549,23 +560,23 @@
                 </div>
                 <form class="contact-form reveal-right" id="contactForm">
                     <div class="form-group">
-                        <input type="text" id="name" required>
-                        <label for="name">Votre Nom</label>
+                        <input type="text" id="name" placeholder=" " required>
+                        <label for="name">Ton nom</label>
                         <span class="focus-border"></span>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" required>
-                        <label for="email">Votre Email</label>
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Ton email</label>
                         <span class="focus-border"></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="subject" required>
-                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" placeholder=" " required>
+                        <label for="subject">C'est à propos de quoi ?</label>
                         <span class="focus-border"></span>
                     </div>
                     <div class="form-group">
-                        <textarea id="message" rows="5" required></textarea>
-                        <label for="message">Votre Message</label>
+                        <textarea id="message" rows="5" placeholder=" " required></textarea>
+                        <label for="message">Dis-moi tout</label>
                         <span class="focus-border"></span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-submit">

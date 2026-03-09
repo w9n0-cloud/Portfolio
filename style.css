@@ -59,34 +59,60 @@ button {
    CUSTOM CURSOR
    ========================================== */
 .cursor {
-    width: 10px;
-    height: 10px;
-    background: var(--primary);
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     position: fixed;
     pointer-events: none;
     z-index: 10001;
-    transition: transform 0.1s;
     mix-blend-mode: difference;
+    will-change: transform;
 }
 
-.cursor-follower {
+.cursor::before,
+.cursor::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 2px;
+}
+
+.cursor::before {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cursor::after {
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cursor.hover {
     width: 40px;
     height: 40px;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    transition: transform 0.3s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
 }
 
-.cursor-follower.hover {
-    width: 60px;
-    height: 60px;
-    border-color: var(--secondary);
-    background: rgba(108, 92, 231, 0.1);
+.cursor.hover::before,
+.cursor.hover::after {
+    background: var(--secondary);
+}
+
+/* ==========================================
+   SCROLL PROGRESS BAR
+   ========================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--gradient-main);
+    z-index: 1001;
+    width: 0%;
+    transition: width 0.1s linear;
 }
 
 /* ==========================================
@@ -294,10 +320,10 @@ button {
     animation-delay: 0.7s;
 }
 
-/* Glitch Effect */
+/* Glitch Effect (lightweight - runs every 5s instead of continuous) */
 .glitch {
     position: relative;
-    animation: glitch 2s infinite;
+    animation: glitch 5s infinite;
 }
 
 .glitch::before,
@@ -308,44 +334,45 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
+    will-change: clip;
 }
 
 .glitch::before {
     left: 2px;
     text-shadow: -2px 0 var(--accent);
     clip: rect(24px, 550px, 90px, 0);
-    animation: glitch-anim 3s infinite linear alternate-reverse;
+    animation: glitch-anim 5s infinite linear alternate-reverse;
 }
 
 .glitch::after {
     left: -2px;
     text-shadow: -2px 0 var(--secondary);
     clip: rect(85px, 550px, 140px, 0);
-    animation: glitch-anim2 3s infinite linear alternate-reverse;
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
 }
 
 @keyframes glitch {
-    0%, 100% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
+    0%, 90%, 100% { transform: translate(0); }
+    92% { transform: translate(-2px, 2px); }
+    94% { transform: translate(-2px, -2px); }
+    96% { transform: translate(2px, 2px); }
+    98% { transform: translate(2px, -2px); }
 }
 
 @keyframes glitch-anim {
-    0% { clip: rect(30px, 9999px, 10px, 0); }
-    25% { clip: rect(15px, 9999px, 140px, 0); }
-    50% { clip: rect(50px, 9999px, 70px, 0); }
-    75% { clip: rect(80px, 9999px, 20px, 0); }
-    100% { clip: rect(10px, 9999px, 100px, 0); }
+    0%, 85% { clip: rect(0, 0, 0, 0); }
+    87% { clip: rect(15px, 9999px, 140px, 0); }
+    90% { clip: rect(50px, 9999px, 70px, 0); }
+    93% { clip: rect(80px, 9999px, 20px, 0); }
+    96%, 100% { clip: rect(0, 0, 0, 0); }
 }
 
 @keyframes glitch-anim2 {
-    0% { clip: rect(65px, 9999px, 100px, 0); }
-    25% { clip: rect(25px, 9999px, 50px, 0); }
-    50% { clip: rect(90px, 9999px, 30px, 0); }
-    75% { clip: rect(5px, 9999px, 80px, 0); }
-    100% { clip: rect(45px, 9999px, 120px, 0); }
+    0%, 85% { clip: rect(0, 0, 0, 0); }
+    88% { clip: rect(25px, 9999px, 50px, 0); }
+    91% { clip: rect(90px, 9999px, 30px, 0); }
+    94% { clip: rect(5px, 9999px, 80px, 0); }
+    97%, 100% { clip: rect(0, 0, 0, 0); }
 }
 
 .typing-container {
@@ -473,7 +500,23 @@ button {
     background: var(--primary);
     padding: 5px 15px;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--primary);
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -482,7 +525,13 @@ button {
 .social-link:hover::before {
     opacity: 1;
     visibility: visible;
-    top: -50px;
+    top: -45px;
+}
+
+.social-link:hover::after {
+    opacity: 1;
+    visibility: visible;
+    top: -13px;
 }
 
 .social-link:hover {
@@ -520,6 +569,7 @@ button {
     border-right-color: var(--secondary);
     border-bottom-color: var(--accent);
     animation: rotate 4s linear infinite;
+    will-change: transform;
 }
 
 @keyframes rotate {
@@ -556,13 +606,14 @@ button {
     font-size: 1.8rem;
     box-shadow: var(--shadow-light);
     animation: float 3s ease-in-out infinite;
+    will-change: transform;
 }
 
-.icon-1 { top: 0; left: 0; color: #e34c26; animation-delay: 0s; }
-.icon-2 { top: 20%; right: -30px; color: #264de4; animation-delay: 0.5s; }
-.icon-3 { bottom: 20%; right: -20px; color: #f0db4f; animation-delay: 1s; }
+.icon-1 { top: 0; left: 0; color: var(--accent); animation-delay: 0s; }
+.icon-2 { top: 20%; right: -30px; color: #f0db4f; animation-delay: 0.5s; }
+.icon-3 { bottom: 20%; right: -20px; color: var(--secondary); animation-delay: 1s; }
 .icon-4 { bottom: 0; left: 20%; color: #3776ab; animation-delay: 1.5s; }
-.icon-5 { top: 30%; left: -40px; color: var(--secondary); animation-delay: 2s; }
+.icon-5 { top: 30%; left: -40px; color: var(--primary-light); animation-delay: 2s; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -642,132 +693,6 @@ section {
     font-size: 1.2rem;
     display: block;
     margin-bottom: 10px;
-}
-
-.section-link {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    font-weight: 400;
-    margin-top: 10px;
-    transition: var(--transition);
-}
-
-.section-link:hover {
-    color: var(--primary);
-}
-
-.section-link i {
-    font-size: 0.8rem;
-    margin-left: 5px;
-}
-
-/* ==========================================
-   QUICK ACCESS SECTION
-   ========================================== */
-.quick-access {
-    padding: 100px 0;
-    background: var(--dark);
-    position: relative;
-}
-
-.quick-access-subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 50px;
-}
-
-.quick-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
-
-.quick-card {
-    background: var(--dark-light);
-    border-radius: 20px;
-    padding: 40px 30px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: var(--transition);
-    border: 1px solid transparent;
-    display: block;
-}
-
-.quick-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--gradient-1);
-    transform: scaleX(0);
-    transition: var(--transition);
-}
-
-.quick-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow);
-}
-
-.quick-card:hover::before {
-    transform: scaleX(1);
-}
-
-.quick-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    background: var(--gradient-1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    transition: var(--transition);
-}
-
-.quick-card:hover .quick-icon {
-    transform: scale(1.1) rotate(10deg);
-}
-
-.quick-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: var(--text);
-}
-
-.quick-card p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-.quick-arrow {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(108, 92, 231, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: var(--transition);
-}
-
-.quick-card:hover .quick-arrow {
-    opacity: 1;
-    transform: translateX(0);
 }
 
 /* ==========================================
@@ -928,6 +853,7 @@ section {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    display: block;
 }
 
 .skill-card::before {
@@ -1143,13 +1069,122 @@ section {
     .tableau-preview-card {
         padding: 30px 20px;
     }
-    
-    .quick-cards {
-        grid-template-columns: 1fr;
+}
+
+/* ==========================================
+   PERSONALITY SECTION
+   ========================================== */
+.personality-section {
+    padding: 100px 0;
+    background: var(--dark);
+}
+
+.personality-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: -40px;
+    margin-bottom: 50px;
+}
+
+.personality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.personality-card {
+    background: var(--dark-light);
+    border-radius: 20px;
+    padding: 35px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.personality-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-main);
+    transform: scaleX(0);
+    transition: var(--transition);
+}
+
+.personality-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.personality-card:hover::before {
+    transform: scaleX(1);
+}
+
+.personality-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    transition: var(--transition);
+}
+
+.personality-card:nth-child(2) .personality-icon {
+    background: var(--gradient-3);
+}
+
+.personality-card:nth-child(3) .personality-icon {
+    background: var(--gradient-2);
+}
+
+.personality-card:nth-child(4) .personality-icon {
+    background: linear-gradient(135deg, #fdcb6e, #e17055);
+}
+
+.personality-card:nth-child(5) .personality-icon {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+}
+
+.personality-card:nth-child(6) .personality-icon {
+    background: linear-gradient(135deg, #55efc4, #00b894);
+}
+
+.personality-card:hover .personality-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.personality-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.personality-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+    .personality-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .quick-card {
-        padding: 30px 20px;
+}
+
+@media (max-width: 768px) {
+    .personality-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1433,6 +1468,23 @@ section {
     justify-content: center;
     color: var(--primary);
     font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+a.clickable-contact {
+    transition: var(--transition);
+    border-radius: 10px;
+    margin: 0 -10px;
+    padding: 15px 10px;
+}
+
+a.clickable-contact:hover {
+    background: rgba(108, 92, 231, 0.08);
+}
+
+a.clickable-contact:hover i {
+    background: var(--primary);
+    color: white;
 }
 
 .contact-social {
@@ -1505,9 +1557,9 @@ section {
 }
 
 .form-group input:focus ~ label,
-.form-group input:valid ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
 .form-group textarea:focus ~ label,
-.form-group textarea:valid ~ label {
+.form-group textarea:not(:placeholder-shown) ~ label {
     top: -10px;
     left: 10px;
     font-size: 0.8rem;
@@ -1641,10 +1693,6 @@ section {
    RESPONSIVE
    ========================================== */
 @media (max-width: 1024px) {
-    .quick-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1764,8 +1812,7 @@ section {
         right: auto !important;
     }
 
-    .cursor,
-    .cursor-follower {
+    .cursor {
         display: none;
     }
 
@@ -1808,5 +1855,37 @@ section {
 
     .contact-form {
         padding: 25px;
+    }
+}
+
+/* ==========================================
+   PERFORMANCE: REDUCED MOTION
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .glitch::before,
+    .glitch::after {
+        display: none;
+    }
+
+    #particles-js {
+        display: none;
+    }
+
+    .cursor {
+        display: none;
+    }
+
+    body {
+        cursor: auto;
+    }
+
+    a, button {
+        cursor: pointer;
     }
 }

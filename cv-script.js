@@ -1,11 +1,20 @@
-// CV Page specific scripts
-
-// Initialize particles with lighter config for CV page
 document.addEventListener('DOMContentLoaded', () => {
-    // Add animation to skill dots
+    function animateElements(selector, transform, baseDelay, stagger) {
+        const items = document.querySelectorAll(selector);
+        items.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = transform;
+            setTimeout(() => {
+                item.style.transition = 'all 0.6s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translate(0)';
+            }, baseDelay + (index * stagger));
+        });
+    }
+
     const skillDots = document.querySelectorAll('.skill-dots');
-    
-    const animateDots = (entries, observer) => {
+
+    const dotsObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const dots = entry.target.querySelectorAll('.dot.filled');
@@ -17,51 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         }, 200);
                     }, index * 100);
                 });
+                observer.unobserve(entry.target);
             }
         });
-    };
-
-    const dotsObserver = new IntersectionObserver(animateDots, {
-        threshold: 0.5
-    });
+    }, { threshold: 0.5 });
 
     skillDots.forEach(dots => dotsObserver.observe(dots));
 
-    // Animate timeline items
-    const timelineItems = document.querySelectorAll('.timeline-item-cv');
-    
-    timelineItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-30px)';
-        
-        setTimeout(() => {
-            item.style.transition = 'all 0.6s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateX(0)';
-        }, 500 + (index * 200));
-    });
+    animateElements('.timeline-item-cv', 'translateX(-30px)', 500, 200);
+    animateElements('.competence-card', 'translateY(30px)', 800, 150);
 
-    // Animate competence cards
-    const competenceCards = document.querySelectorAll('.competence-card');
-    
-    competenceCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'all 0.6s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 800 + (index * 150));
-    });
-
-    // Download CV as PDF (using print functionality)
     const downloadBtn = document.getElementById('downloadCV');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Create a notification
+
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
@@ -81,9 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 style="margin-bottom: 10px;">Génération du PDF</h3>
                 <p>Utilisez Ctrl+P ou le bouton Imprimer<br>et sélectionnez "Enregistrer en PDF"</p>
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.style.animation = 'fadeOut 0.3s ease forwards';
                 setTimeout(() => {
@@ -94,27 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add hover effects to hobby items
     const hobbyItems = document.querySelectorAll('.hobby-item');
-    
+
     hobbyItems.forEach(item => {
         item.addEventListener('mouseenter', () => {
-            const icon = item.querySelector('i');
-            icon.style.transform = 'rotate(360deg) scale(1.2)';
+            item.querySelector('i').style.transform = 'rotate(360deg) scale(1.2)';
         });
-        
+
         item.addEventListener('mouseleave', () => {
-            const icon = item.querySelector('i');
-            icon.style.transform = 'rotate(0) scale(1)';
+            item.querySelector('i').style.transform = 'rotate(0) scale(1)';
         });
     });
 
-    // Add typing effect to CV name
     const cvName = document.querySelector('.cv-name');
     if (cvName) {
         const originalText = cvName.textContent;
-        cvName.textContent = '';
-        
+        cvName.style.visibility = 'hidden';
+
         let charIndex = 0;
         const typeWriter = () => {
             if (charIndex < originalText.length) {
@@ -123,31 +98,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(typeWriter, 80);
             }
         };
-        
-        setTimeout(typeWriter, 1000);
+
+        setTimeout(() => {
+            cvName.textContent = '';
+            cvName.style.visibility = 'visible';
+            typeWriter();
+        }, 1000);
     }
 });
 
-// Counter animation for any numbers on the page
-function animateValue(obj, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// Parallax effect on scroll for CV header
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-    const cvHeader = document.querySelector('.cv-header');
-    if (cvHeader) {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.3;
-        cvHeader.style.backgroundPosition = `center ${rate}px`;
+    if (!scrollTicking) {
+        requestAnimationFrame(() => {
+            const cvHeader = document.querySelector('.cv-header');
+            if (cvHeader) {
+                cvHeader.style.backgroundPosition = `center ${window.scrollY * 0.3}px`;
+            }
+            scrollTicking = false;
+        });
+        scrollTicking = true;
     }
 });

@@ -5,32 +5,35 @@ window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
     setTimeout(() => {
         loader.classList.add('hidden');
-    }, 2000);
+    }, 800);
 });
 
 // ==========================================
-// CUSTOM CURSOR
+// CUSTOM CURSOR (lightweight - GPU accelerated)
 // ==========================================
 const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
+let cursorX = 0, cursorY = 0;
+let cursorRAF = false;
+
+function updateCursor() {
+    cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
+    cursorRAF = false;
+}
 
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    cursorFollower.style.left = e.clientX + 'px';
-    cursorFollower.style.top = e.clientY + 'px';
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    if (!cursorRAF) {
+        cursorRAF = true;
+        requestAnimationFrame(updateCursor);
+    }
 });
 
 // Hover effect on interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .skill-card, .project-card');
+const interactiveElements = document.querySelectorAll('a, button, .skill-card, .project-card, .personality-card');
 interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('hover');
-    });
-    el.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('hover');
-    });
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
 });
 
 // ==========================================
@@ -39,10 +42,10 @@ interactiveElements.forEach(el => {
 particlesJS('particles-js', {
     particles: {
         number: {
-            value: 80,
+            value: 35,
             density: {
                 enable: true,
-                value_area: 800
+                value_area: 900
             }
         },
         color: {
@@ -52,44 +55,36 @@ particlesJS('particles-js', {
             type: 'circle'
         },
         opacity: {
-            value: 0.5,
+            value: 0.4,
             random: true,
             anim: {
-                enable: true,
-                speed: 1,
-                opacity_min: 0.1,
-                sync: false
+                enable: false
             }
         },
         size: {
-            value: 3,
+            value: 2.5,
             random: true,
             anim: {
-                enable: true,
-                speed: 2,
-                size_min: 0.1,
-                sync: false
+                enable: false
             }
         },
         line_linked: {
             enable: true,
             distance: 150,
             color: '#6c5ce7',
-            opacity: 0.2,
+            opacity: 0.15,
             width: 1
         },
         move: {
             enable: true,
-            speed: 2,
+            speed: 1,
             direction: 'none',
             random: false,
             straight: false,
             out_mode: 'out',
             bounce: false,
             attract: {
-                enable: true,
-                rotateX: 600,
-                rotateY: 1200
+                enable: false
             }
         }
     },
@@ -101,24 +96,20 @@ particlesJS('particles-js', {
                 mode: 'grab'
             },
             onclick: {
-                enable: true,
-                mode: 'push'
+                enable: false
             },
             resize: true
         },
         modes: {
             grab: {
-                distance: 140,
+                distance: 120,
                 line_linked: {
-                    opacity: 1
+                    opacity: 0.6
                 }
-            },
-            push: {
-                particles_nb: 4
             }
         }
     },
-    retina_detect: true
+    retina_detect: false
 });
 
 // ==========================================
@@ -129,14 +120,7 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksItems = document.querySelectorAll('.nav-link');
 
-// Scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
+// Scroll effect (handled in unified scroll handler below)
 
 // Mobile menu
 hamburger.addEventListener('click', () => {
@@ -151,37 +135,20 @@ navLinksItems.forEach(link => {
     });
 });
 
-// Active link on scroll
+// Active link on scroll (handled in unified scroll handler below)
 const sections = document.querySelectorAll('section[id]');
-
-window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 200;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinksItems.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + sectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    });
-});
 
 // ==========================================
 // TYPING EFFECT
 // ==========================================
 const dynamicText = document.querySelector('.dynamic-text');
 const words = [
-    'Développeur Web',
+    'Curieux de tout',
+    'Toujours partant pour discuter',
+    'Passionné d\'informatique',
     'Étudiant en BTS SIO',
-    'Passionné de Réseaux',
-    'Amateur de Code',
+    'Ouvert d\'esprit',
+    'Fan de cybersécurité',
     'Futur Ingénieur'
 ];
 
@@ -213,7 +180,7 @@ function typeEffect() {
 }
 
 // Start typing effect after loader
-setTimeout(typeEffect, 2500);
+setTimeout(typeEffect, 1200);
 
 // ==========================================
 // COUNTER ANIMATION
@@ -307,19 +274,14 @@ filterBtns.forEach(btn => {
 // ==========================================
 const revealElements = document.querySelectorAll('.reveal-left, .reveal-right');
 
-const revealOnScroll = () => {
+// Initial reveal check on load
+window.addEventListener('load', () => {
     revealElements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (elementTop < windowHeight - 100) {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
             el.classList.add('active');
         }
     });
-};
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+});
 
 // ==========================================
 // INTERSECTION OBSERVER FOR ANIMATIONS
@@ -336,48 +298,46 @@ const observer = new IntersectionObserver((entries) => {
             if (entry.target.classList.contains('about-stats')) {
                 statNumbers.forEach(animateCounter);
             }
-            
+
             // Animate skill bars
             if (entry.target.classList.contains('skills')) {
                 animateSkillBars();
             }
-            
+
             // Animate timeline items
             if (entry.target.classList.contains('timeline-item')) {
                 entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+            }
+
+            // Animate personality cards staggered
+            if (entry.target.classList.contains('personality-card')) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         }
     });
 }, observerOptions);
 
 // Observe elements
-document.querySelector('.about-stats')?.let && observer.observe(document.querySelector('.about-stats'));
-document.querySelector('.skills')?.let && observer.observe(document.querySelector('.skills'));
-document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-// Better observer setup
 const aboutStats = document.querySelector('.about-stats');
 if (aboutStats) observer.observe(aboutStats);
 
 const skillsSection = document.querySelector('.skills');
 if (skillsSection) observer.observe(skillsSection);
 
-document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
+document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
+
+document.querySelectorAll('.personality-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+    observer.observe(card);
 });
 
 // ==========================================
 // BACK TO TOP BUTTON
 // ==========================================
 const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-});
 
 backToTop.addEventListener('click', () => {
     window.scrollTo({
@@ -417,8 +377,8 @@ contactForm.addEventListener('submit', (e) => {
     `;
     successMsg.innerHTML = `
         <i class="fas fa-check-circle" style="font-size: 4rem; margin-bottom: 20px; display: block;"></i>
-        <h3 style="margin-bottom: 10px;">Message Envoyé !</h3>
-        <p>Merci ${name}, je vous répondrai bientôt.</p>
+        <h3 style="margin-bottom: 10px;">C'est envoyé !</h3>
+        <p>Merci ${name}, je te réponds vite !</p>
     `;
     
     document.body.appendChild(successMsg);
@@ -462,22 +422,70 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ==========================================
-// PARALLAX EFFECT ON HERO
+// UNIFIED SCROLL HANDLER (single rAF-throttled listener)
 // ==========================================
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroContent = document.querySelector('.hero-content');
-    
-    if (heroContent && scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-        heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
+const heroContent = document.querySelector('.hero-content');
+const scrollProgress = document.getElementById('scrollProgress');
+let scrollTicking = false;
+
+function onScroll() {
+    const scrollY = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollY / docHeight) * 100;
+
+    // Scroll progress bar
+    if (scrollProgress) {
+        scrollProgress.style.width = scrollPercent + '%';
     }
-});
+
+    // Navbar scroll effect
+    navbar.classList.toggle('scrolled', scrollY > 100);
+
+    // Active nav link
+    sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 200;
+        const sectionId = section.getAttribute('id');
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinksItems.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + sectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+
+    // Back to top
+    backToTop.classList.toggle('visible', scrollY > 500);
+
+    // Parallax hero
+    if (heroContent && scrollY < window.innerHeight) {
+        heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+        heroContent.style.opacity = 1 - (scrollY / window.innerHeight);
+    }
+
+    // Scroll reveal
+    revealElements.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+            el.classList.add('active');
+        }
+    });
+
+    scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(onScroll);
+    }
+}, { passive: true });
 
 // ==========================================
 // TILT EFFECT ON CARDS
 // ==========================================
-const cards = document.querySelectorAll('.skill-card, .project-card');
+const cards = document.querySelectorAll('.skill-card, .project-card, .personality-card');
 
 cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -600,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial animation for skill bars in first tab
     setTimeout(() => {
         animateSkillBars();
-    }, 3000);
+    }, 1500);
 });
 
 // ==========================================
@@ -635,5 +643,5 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('%c🚀 Portfolio de Mohamed BEN HARIZ', 'font-size: 24px; font-weight: bold; color: #6c5ce7;');
-console.log('%c💡 Essayez le code Konami pour une surprise !', 'font-size: 14px; color: #00cec9;');
+console.log('%c Yo ! Bienvenue sur mon portfolio', 'font-size: 24px; font-weight: bold; color: #6c5ce7;');
+console.log('%c Tu fouilles dans la console ? Respect. Essaie le code Konami ;)', 'font-size: 14px; color: #00cec9;');
