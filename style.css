@@ -2,20 +2,20 @@
    VARIABLES & RESET
    ========================================== */
 :root {
-    --primary: #6c5ce7;
-    --primary-light: #a29bfe;
-    --secondary: #00cec9;
-    --accent: #fd79a8;
-    --dark: #0a0a0f;
-    --dark-light: #1a1a2e;
-    --dark-lighter: #16213e;
-    --text: #ffffff;
-    --text-muted: #a0a0a0;
-    --gradient-1: linear-gradient(135deg, #6c5ce7, #a29bfe);
-    --gradient-2: linear-gradient(135deg, #00cec9, #81ecec);
-    --gradient-3: linear-gradient(135deg, #fd79a8, #e84393);
-    --gradient-main: linear-gradient(135deg, #6c5ce7 0%, #00cec9 50%, #fd79a8 100%);
-    --shadow: 0 10px 40px rgba(108, 92, 231, 0.3);
+    --primary: #c0956c;
+    --primary-light: #d4b896;
+    --secondary: #7c9885;
+    --accent: #c17b7b;
+    --dark: #111113;
+    --dark-light: #1a1a1f;
+    --dark-lighter: #252530;
+    --text: #f0ebe3;
+    --text-muted: #9a9a9a;
+    --gradient-1: linear-gradient(135deg, #c0956c, #d4b896);
+    --gradient-2: linear-gradient(135deg, #7c9885, #a3c4af);
+    --gradient-3: linear-gradient(135deg, #c17b7b, #d4a0a0);
+    --gradient-main: linear-gradient(135deg, #c0956c 0%, #7c9885 50%, #c17b7b 100%);
+    --shadow: 0 10px 40px rgba(192, 149, 108, 0.2);
     --shadow-light: 0 5px 20px rgba(0, 0, 0, 0.3);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -33,18 +33,40 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--dark);
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
+}
+
+/* Skip to content (accessibility) */
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 0 10px 10px;
+    z-index: 10003;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    cursor: none;
 }
 
 ul {
@@ -52,54 +74,10 @@ ul {
 }
 
 button {
-    cursor: none;
+    cursor: pointer;
 }
 
-/* ==========================================
-   CUSTOM CURSOR
-   ========================================== */
-.cursor {
-    width: 20px;
-    height: 20px;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10001;
-    mix-blend-mode: difference;
-    will-change: transform;
-}
-
-.cursor::before,
-.cursor::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 2px;
-}
-
-.cursor::before {
-    width: 2px;
-    height: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.cursor::after {
-    height: 2px;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.cursor.hover {
-    width: 40px;
-    height: 40px;
-    transition: width 0.2s, height 0.2s;
-}
-
-.cursor.hover::before,
-.cursor.hover::after {
-    background: var(--secondary);
-}
+/* Custom cursor removed - using default cursor for a cleaner, less tech-focused look */
 
 /* ==========================================
    SCROLL PROGRESS BAR
@@ -172,17 +150,7 @@ button {
     }
 }
 
-/* ==========================================
-   PARTICLES
-   ========================================== */
-#particles-js {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+/* Particles removed for a cleaner look */
 
 /* ==========================================
    NAVBAR
@@ -199,12 +167,12 @@ button {
     z-index: 1000;
     transition: var(--transition);
     backdrop-filter: blur(10px);
-    background: rgba(10, 10, 15, 0.8);
+    background: rgba(17, 17, 19, 0.8);
 }
 
 .navbar.scrolled {
     padding: 15px 50px;
-    background: rgba(10, 10, 15, 0.95);
+    background: rgba(17, 17, 19, 0.95);
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -320,60 +288,7 @@ button {
     animation-delay: 0.7s;
 }
 
-/* Glitch Effect (lightweight - runs every 5s instead of continuous) */
-.glitch {
-    position: relative;
-    animation: glitch 5s infinite;
-}
-
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    will-change: clip;
-}
-
-.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--accent);
-    clip: rect(24px, 550px, 90px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--secondary);
-    clip: rect(85px, 550px, 140px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch {
-    0%, 90%, 100% { transform: translate(0); }
-    92% { transform: translate(-2px, 2px); }
-    94% { transform: translate(-2px, -2px); }
-    96% { transform: translate(2px, 2px); }
-    98% { transform: translate(2px, -2px); }
-}
-
-@keyframes glitch-anim {
-    0%, 85% { clip: rect(0, 0, 0, 0); }
-    87% { clip: rect(15px, 9999px, 140px, 0); }
-    90% { clip: rect(50px, 9999px, 70px, 0); }
-    93% { clip: rect(80px, 9999px, 20px, 0); }
-    96%, 100% { clip: rect(0, 0, 0, 0); }
-}
-
-@keyframes glitch-anim2 {
-    0%, 85% { clip: rect(0, 0, 0, 0); }
-    88% { clip: rect(25px, 9999px, 50px, 0); }
-    91% { clip: rect(90px, 9999px, 30px, 0); }
-    94% { clip: rect(5px, 9999px, 80px, 0); }
-    97%, 100% { clip: rect(0, 0, 0, 0); }
-}
+/* Glitch effect removed for a cleaner aesthetic */
 
 .typing-container {
     font-size: 1.5rem;
@@ -458,7 +373,7 @@ button {
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 15px 40px rgba(192, 149, 108, 0.3);
 }
 
 .btn-secondary {
@@ -610,9 +525,9 @@ button {
 }
 
 .icon-1 { top: 0; left: 0; color: var(--accent); animation-delay: 0s; }
-.icon-2 { top: 20%; right: -30px; color: #f0db4f; animation-delay: 0.5s; }
+.icon-2 { top: 20%; right: -30px; color: var(--primary); animation-delay: 0.5s; }
 .icon-3 { bottom: 20%; right: -20px; color: var(--secondary); animation-delay: 1s; }
-.icon-4 { bottom: 0; left: 20%; color: #3776ab; animation-delay: 1.5s; }
+.icon-4 { bottom: 0; left: 20%; color: var(--accent); animation-delay: 1.5s; }
 .icon-5 { top: 30%; left: -40px; color: var(--primary-light); animation-delay: 2s; }
 
 @keyframes float {
@@ -689,8 +604,10 @@ section {
 
 .title-number {
     color: var(--primary);
-    font-family: monospace;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     display: block;
     margin-bottom: 10px;
 }
@@ -765,7 +682,7 @@ section {
 }
 
 .stat-item.clickable:hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
     transform: translateY(-5px);
 }
 
@@ -1033,7 +950,7 @@ section {
 }
 
 .preview-stat:nth-child(4) .stat-icon {
-    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+    background: linear-gradient(135deg, #7c9885 0%, #a3c4af 100%);
 }
 
 .stat-info {
@@ -1149,15 +1066,15 @@ section {
 }
 
 .personality-card:nth-child(4) .personality-icon {
-    background: linear-gradient(135deg, #fdcb6e, #e17055);
+    background: linear-gradient(135deg, #d4a373, #b07d56);
 }
 
 .personality-card:nth-child(5) .personality-icon {
-    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    background: linear-gradient(135deg, #8fa4a0, #6b8f85);
 }
 
 .personality-card:nth-child(6) .personality-icon {
-    background: linear-gradient(135deg, #55efc4, #00b894);
+    background: linear-gradient(135deg, #a3c4af, #7c9885);
 }
 
 .personality-card:hover .personality-icon {
@@ -1479,7 +1396,7 @@ a.clickable-contact {
 }
 
 a.clickable-contact:hover {
-    background: rgba(108, 92, 231, 0.08);
+    background: rgba(192, 149, 108, 0.08);
 }
 
 a.clickable-contact:hover i {
@@ -1812,17 +1729,6 @@ a.clickable-contact:hover i {
         right: auto !important;
     }
 
-    .cursor {
-        display: none;
-    }
-
-    body {
-        cursor: auto;
-    }
-
-    a, button {
-        cursor: pointer;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1866,26 +1772,5 @@ a.clickable-contact:hover i {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-    }
-
-    .glitch::before,
-    .glitch::after {
-        display: none;
-    }
-
-    #particles-js {
-        display: none;
-    }
-
-    .cursor {
-        display: none;
-    }
-
-    body {
-        cursor: auto;
-    }
-
-    a, button {
-        cursor: pointer;
     }
 }

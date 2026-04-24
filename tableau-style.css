@@ -14,7 +14,7 @@
     justify-content: center;
     text-align: center;
     padding: 150px 20px 60px;
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.2) 0%, rgba(0, 206, 201, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(192, 149, 108, 0.15) 0%, rgba(124, 152, 133, 0.1) 100%);
     position: relative;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .realisation-row:hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
 }
 
 .realisation-row:nth-child(even) {
@@ -178,7 +178,7 @@
 }
 
 .realisation-row:nth-child(even):hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
 }
 
 .realisation-row td {
@@ -189,12 +189,12 @@
 
 /* Highlight Row (Projet Principal) */
 .highlight-row {
-    background: linear-gradient(90deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1)) !important;
+    background: linear-gradient(90deg, rgba(192, 149, 108, 0.12), rgba(124, 152, 133, 0.1)) !important;
     border-left: 4px solid var(--primary);
 }
 
 .highlight-row:hover {
-    background: linear-gradient(90deg, rgba(108, 92, 231, 0.25), rgba(0, 206, 201, 0.15)) !important;
+    background: linear-gradient(90deg, rgba(192, 149, 108, 0.2), rgba(124, 152, 133, 0.12)) !important;
 }
 
 /* Realisation Name Cell */
@@ -217,7 +217,7 @@
     color: var(--primary);
     width: 32px;
     height: 32px;
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -277,7 +277,7 @@
 
 .projets-details {
     padding: 80px 0;
-    background: linear-gradient(180deg, var(--dark) 0%, rgba(108, 92, 231, 0.05) 100%);
+    background: linear-gradient(180deg, var(--dark) 0%, rgba(192, 149, 108, 0.05) 100%);
 }
 
 .section-title-alt {
@@ -336,7 +336,7 @@
 /* Featured Card */
 .projet-card.featured {
     border: 2px solid var(--primary);
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, var(--dark-light) 100%);
+    background: linear-gradient(135deg, rgba(192, 149, 108, 0.1) 0%, var(--dark-light) 100%);
     grid-column: span 2;
 }
 
@@ -410,7 +410,7 @@
 }
 
 .projet-type {
-    background: rgba(108, 92, 231, 0.2);
+    background: rgba(192, 149, 108, 0.15);
     padding: 4px 12px;
     border-radius: 15px;
     font-size: 0.75rem;
@@ -447,7 +447,7 @@
 }
 
 .projet-competences span {
-    background: rgba(0, 206, 201, 0.1);
+    background: rgba(124, 152, 133, 0.1);
     color: var(--secondary);
     padding: 6px 12px;
     border-radius: 20px;
@@ -496,7 +496,7 @@
 
 .projet-link:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 5px 20px rgba(192, 149, 108, 0.3);
 }
 
 .projet-link i {
@@ -541,13 +541,13 @@
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 15px 40px rgba(192, 149, 108, 0.15);
 }
 
 .stat-icon {
     width: 60px;
     height: 60px;
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -581,7 +581,7 @@
 
 .legende-section {
     padding: 60px 0;
-    background: rgba(108, 92, 231, 0.03);
+    background: rgba(192, 149, 108, 0.03);
 }
 
 .legende-card {
@@ -620,7 +620,7 @@
 }
 
 .comp-item:hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(192, 149, 108, 0.1);
     transform: translateX(5px);
 }
 
@@ -678,7 +678,7 @@
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 15px 30px rgba(192, 149, 108, 0.3);
 }
 
 .btn-secondary {

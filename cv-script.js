@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+                background: linear-gradient(135deg, #c0956c, #d4b896);
                 padding: 30px 50px;
                 border-radius: 20px;
                 text-align: center;
                 z-index: 10000;
                 animation: fadeIn 0.3s ease;
-                box-shadow: 0 20px 60px rgba(108, 92, 231, 0.4);
+                box-shadow: 0 20px 60px rgba(192, 149, 108, 0.3);
             `;
             notification.innerHTML = `
                 <i class="fas fa-info-circle" style="font-size: 2.5rem; margin-bottom: 15px; display: block;"></i>

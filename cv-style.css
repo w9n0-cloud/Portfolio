@@ -244,7 +244,7 @@
 .lang-level {
     font-size: 0.85rem;
     color: var(--secondary);
-    background: rgba(0, 206, 201, 0.1);
+    background: rgba(124, 152, 133, 0.1);
     padding: 4px 12px;
     border-radius: 15px;
 }
@@ -407,7 +407,7 @@
 .timeline-date-cv {
     font-size: 0.85rem;
     color: var(--secondary);
-    background: rgba(0, 206, 201, 0.1);
+    background: rgba(124, 152, 133, 0.1);
     padding: 5px 15px;
     border-radius: 20px;
     white-space: nowrap;
